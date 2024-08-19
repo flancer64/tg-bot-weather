@@ -1,0 +1,33 @@
+{
+  "name": "@flancer64/tg-bot-weather",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A test bot for Telegram",
+  "homepage": "https://github.com/flancer64/tg-bot-weather/",
+  "bugs": {
+    "url": "https://github.com/flancer64/tg-bot-weather/issues",
+    "email": "alex@flancer32.com"
+  },
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Alex Gusev",
+    "email": "alex@flancer64.com",
+    "url": "https://github.com/flancer64"
+  },
+  "repository": "github:flancer64/tg-bot-weather",
+  "scripts": {
+    "help": "node ./bin/tequila.mjs -h",
+    "start": "node ./bin/tequila.mjs app-start",
+    "stop": "node ./bin/tequila.mjs app-stop",
+    "version": "node ./bin/tequila.mjs core-version",
+    "web-start": "node ./bin/tequila.mjs web-server-start",
+    "web-stop": "node ./bin/tequila.mjs web-server-stop"
+  },
+  "dependencies": {
+    "@teqfw/core": "github:teqfw/core",
+    "@teqfw/di": "github:teqfw/di",
+    "@teqfw/web": "github:teqfw/web",
+    "grammy": "^1.28.0"
+  },
+  "devDependencies": {}
+}
