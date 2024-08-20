@@ -1,7 +1,10 @@
 {
   "@flancer64/tg-bot-weather": {
-    "apiKeyTelegram": "...",
     "apiKeyWeather": "..."
+  },
+  "@flancer32/teq-telegram-bot": {
+    "apiKeyTelegram": "...",
+    "webhookUseSecret": false
   },
   "@teqfw/core": {
     "devMode": true

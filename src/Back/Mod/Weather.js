@@ -18,7 +18,7 @@ export default class Weather_Back_Mod_Weather {
     constructor(
         {
             Weather_Back_Defaults$: DEF,
-            TeqFw_Core_Shared_Api_Logger$: logger,
+            TeqFw_Core_Shared_Api_Logger$$: logger,
             TeqFw_Core_Back_Config$: config,
             Weather_Back_Dto_Weather$: dtoWeather,
             Weather_Back_Dto_Weather_Air$: dtoAir,
@@ -71,7 +71,7 @@ export default class Weather_Back_Mod_Weather {
          */
         this.current = async function (lat, lng) {
             let res;
-            console.log(`WeatherAPI_current: ${lat},${lng}.`);
+            logger.info(`WeatherAPI_current: ${lat},${lng}.`);
             const url = URL + `${lat},${lng}`;
             const rs = await fetchWeatherData(url);
             if (rs?.current) {

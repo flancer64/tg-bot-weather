@@ -17,13 +17,14 @@
   "repository": "github:flancer64/tg-bot-weather",
   "scripts": {
     "help": "node ./bin/tequila.mjs -h",
-    "start": "node ./bin/tequila.mjs app-start",
-    "stop": "node ./bin/tequila.mjs app-stop",
+    "start": "node ./bin/tequila.mjs tg-bot-start",
+    "stop": "node ./bin/tequila.mjs tg-bot-stop",
     "version": "node ./bin/tequila.mjs core-version",
     "web-start": "node ./bin/tequila.mjs web-server-start",
     "web-stop": "node ./bin/tequila.mjs web-server-stop"
   },
   "dependencies": {
+    "@flancer32/teq-telegram-bot": "github:flancer32/teq-telegram-bot",
     "@teqfw/core": "github:teqfw/core",
     "@teqfw/di": "github:teqfw/di",
     "@teqfw/web": "github:teqfw/web",
