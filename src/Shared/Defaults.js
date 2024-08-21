@@ -3,7 +3,6 @@
  */
 export default class Weather_Shared_Defaults {
     NAME = '@flancer64/tg-bot-weather';
-    SPACE_BOT = 'telegram-bot';
 
     constructor() {
         Object.freeze(this);

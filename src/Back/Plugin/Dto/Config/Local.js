@@ -12,8 +12,6 @@ const NS = 'Weather_Back_Plugin_Dto_Config_Local';
 class Dto {
     static namespace = NS;
     /** @type {string} */
-    apiKeyTelegram;
-    /** @type {string} */
     apiKeyWeather;
 }
 
@@ -37,7 +35,6 @@ export default class Weather_Back_Plugin_Dto_Config_Local {
             // create new DTO and populate it with initialization data
             const res = Object.assign(new Dto(), data);
             // cast known attributes
-            res.apiKeyTelegram = cast.string(data?.apiKeyTelegram);
             res.apiKeyWeather = cast.string(data?.apiKeyWeather);
             return res;
         };

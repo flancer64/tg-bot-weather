@@ -5,6 +5,16 @@ export default class Weather_Back_Defaults {
 
     CLI_PREFIX = 'app';
 
+    /* The bot command registry. */
+    CMD = {
+        HELP: 'help',
+        SETTINGS: 'settings',
+        START: 'start',
+        WEATHER: 'weather',
+        WHO_AM_I: 'who_am_i',
+        WHO_ARE_YOU: 'who_are_you',
+    };
+
     DATA_FILE_PID = './var/app.pid'; // PID file to stop running the bot.
 
     /** @type {TeqFw_Web_Back_Defaults} */

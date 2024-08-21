@@ -2,7 +2,7 @@
  * Display the messages about the processing of an API request.
  */
 // IMPORTS
-import {Keyboard} from 'grammy';
+import {InlineKeyboard, Keyboard} from 'grammy';
 
 // CLASSES
 /**
@@ -10,39 +10,76 @@ import {Keyboard} from 'grammy';
  */
 export default class Weather_Back_Di_Replace_Telegram_Bot_Back_Api_Setup {
     /**
+     * @param {Weather_Back_Defaults} DEF
      * @param {TeqFw_Core_Shared_Api_Logger} logger -  instance
      * @param {Weather_Back_Mod_Weather} modWeather
+     * @param {Weather_Back_Bot_Cmd_Help} cmdHelp
+     * @param {Weather_Back_Bot_Cmd_WhoAmI} cmdWhoAmI
+     * @param {Weather_Back_Bot_Cmd_WhoAreYou} cmdWhoAreYou
      */
     constructor(
         {
+            Weather_Back_Defaults$: DEF,
             TeqFw_Core_Shared_Api_Logger$$: logger,
             Weather_Back_Mod_Weather$: modWeather,
+            Weather_Back_Bot_Cmd_Help$: cmdHelp,
+            Weather_Back_Bot_Cmd_WhoAmI$: cmdWhoAmI,
+            Weather_Back_Bot_Cmd_WhoAreYou$: cmdWhoAreYou,
         }
     ) {
-        // INSTANCE METHODS
+        // VARS
+        const CMD = DEF.CMD;
 
-        this.getCommands = function () {
-            return [
-                {command: 'help', description: 'Show help text'},
-                {command: 'settings', description: 'Open settings'},
-                {command: 'start', description: 'Start the bot'},
-                {command: 'weather', description: 'Get the weather for the current location.'},
+        // INSTANCE METHODS
+        this.commands = async function (bot) {
+
+            const cmdDef = [
+                {command: CMD.HELP, description: 'Display help text'},
+                {command: CMD.SETTINGS, description: 'Open settings'},
+                {command: CMD.START, description: 'Start the bot'},
+                {command: CMD.WHO_AM_I, description: 'Info about the user'},
+                {command: CMD.WHO_ARE_YOU, description: 'Info about the bot'},
+                {command: CMD.WEATHER, description: 'Get the weather for your location'},
             ];
+            await bot.api.setMyCommands(cmdDef);
+            logger.info(`Total ${cmdDef.length} commands are set for the bot (default).`);
+            const cmdRu = [
+                {command: CMD.HELP, description: 'Показать справку'},
+                {command: CMD.SETTINGS, description: 'Открыть настройки'},
+                {command: CMD.START, description: 'Начать работу'},
+                {command: CMD.WHO_AM_I, description: 'Информация о пользователе'},
+                {command: CMD.WHO_ARE_YOU, description: 'Информация о боте'},
+                {command: CMD.WEATHER, description: 'Прогноз погоды'},
+            ];
+            await bot.api.setMyCommands(cmdRu, {language_code: 'ru'});
+            logger.info(`Total ${cmdRu.length} commands are set for the bot (ru).`);
+            return bot;
         };
 
         this.handlers = function (bot) {
+            bot.command(CMD.HELP, cmdHelp);
+            bot.command(CMD.WHO_AM_I, cmdWhoAmI);
+            bot.command(CMD.WHO_ARE_YOU, cmdWhoAreYou);
 
+            bot.command('start', async (ctx) => {
+                const inlineKeyboard = new InlineKeyboard()
+                    .text('🚀 Кнопка 1', 'callback_data_1').text('🎉 Кнопка 2', 'callback_data_2') // Две кнопки в одном ряду с эмодзи
+                    .row()
+                    .text('📚 Кнопка 3', 'callback_data_3').text('⚙️ Кнопка 4', 'callback_data_4'); // Ещё две кнопки на новом ряду с эмодзи
 
-            bot.command('start', (ctx) => {
-                ctx.reply('Privet, Tanja!');
+                // Отправка сообщения с inline-кнопками
+                await ctx.reply('Выберите действие:', {
+                    reply_markup: inlineKeyboard,
+                });
             });
 
             bot.command('weather', (ctx) => {
                 const keyboard = new Keyboard()
-                    .text('Cancel') // Add another button to balance the size
-                    .row() // Move to the next row for the location button
-                    .requestLocation('📍 Share your location') // Location request button
-                    .resized()
+                    .text('btn1').text('btn1').text('btn1').text('btn1').row()
+                    .text('btn2').row()
+                    .text('btn3').row()
+                    .requestLocation('📍 Share your location')
+                    // .resized()
                     .build();
 
                 ctx.reply('I need to know your location to provide a weather in your region.', {
